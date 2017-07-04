@@ -8,7 +8,7 @@
 require_once("clases/Materiales.php");
 require_once('clases/lib/nusoap.php');
 	
-$host = 'http://localhost:8080/ejercicioFinal/clases/SERVIDOR/wsMateriales.php';
+$host = 'http://localhost:8080/abmUsuarios/clases/SERVIDOR/wsMateriales.php';
 $client = new nusoap_client($host . '?wsdl');
 
 $arrayDeMateriales=$client->call('ObtenerLosMateriales');
@@ -31,7 +31,8 @@ $miUser = json_decode($user);
 	<thead>
 		<tr>
 			<?php
-			if($miUser->perfil!='comprador'){
+			//Si el perfil es distinto de comprador 
+			if ($miUser->perfil != "comprador") {
 				echo "<th>Editar</th><th>Borrar</th><th>Codigo Prod</th><th>Nombre</th><th>Precio</th><th>Tipo</th>";
 			} else {
 				echo "<th>Codigo Prod</th><th>Nombre</th><th>Precio</th><th>Tipo</th>";

@@ -24,7 +24,7 @@ $user = $_SESSION["Usuario"];
             <div class="page-header">
             <?php
                 $objUser = json_decode($user);
-               //echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Enunciado()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Enunciado</a>";
+               echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Enunciado()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Enunciado</a>";
                 
 			   if($objUser->perfil !='invitado')//grilla
 					{ 
@@ -36,7 +36,7 @@ $user = $_SESSION["Usuario"];
 				}
 			   if($objUser->perfil !='invitado') // editar usuario 
 				  { 
-			//		echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
+					echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
 				  }
 				 if($objUser->perfil !='invitado') // mostrar cds
 					{

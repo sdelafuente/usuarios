@@ -1,8 +1,9 @@
 <?php
 //Verifico la session
-if(!isset($_SESSION))
+if(!isset($_SESSION))    
     //Start Session     
 	session_start();
+
    if(!isset($_SESSION['appLucasRodriguezSession_on'])){
       header("location:frmLogin.php");
    }
@@ -23,33 +24,44 @@ if(!isset($_SESSION))
 	$obj->perfil = "";
 
     //Usuarios 
-	$db_txt = 'usuarios.txt';
+	$db_txt = 'usuarios.txt';		
 	
 
-		
-	
-	
+//Si existe como archivo 	
 if(is_file($db_txt)) {
-    //
+    
+    //Capturo todos los registros 
 	$lineas = file($db_txt);
+
+    //Loopeao 
 	foreach($lineas as $linea) {
+
+        //Genero una lista de casa registros 
 	    list($user,$pass,$perfil) = explode("=>",trim($linea),3);
-		if(is_string($user)  &&  is_string($pass)) {
+		
+        //Verificacion de tipo string 
+        if(is_string($user)  &&  is_string($pass)) {
 			
+            //Si los datos que ingresaron son correctos, entra. 
 			if( $user == $obj->email && $obj->pass) {
 				
-                setcookie("miCookie",$unUsuario->email ,  time()+30 , '/');
+                //Set de mi cookie
+                setcookie("miCookie",$obj->email ,  time()+30 , '/');
 				
-                $obj->nombre = strstr($unUsuario->email, '@', true);
+                //Cargo el nombre y el perfil
+                $obj->nombre = strstr($obj->email, '@', true);
 				$obj->perfil = $perfil;
 				
-                $_SESSION['Usuario']= json_encode($obj);
+                //Creo la session del Usuario activo. 
+                $_SESSION['Usuario'] = json_encode($obj);
 					
 			}
         }
     }
 } else {
+        //Por el momento Irrelevante.
         $obj->Exito = false;
    }	
-		
+
+//Devuelvo el Objeto Json		
 echo json_encode($obj);

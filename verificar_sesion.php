@@ -1,1 +1,1 @@
-<?phpif ( !isset($_SESSION)) {         session_start();     } if(!isset($_SESSION["Usuario"])) {    //Veo la locacion.    header("location: ./frmLogin.php?uss=1"); }
+<?php    //Si no esta seteada la Session, la comienzo    if ( !isset($_SESSION)) {             session_start();         }     //Si no esta seteado la session de Usuarios, vuelvo al login     if(!isset($_SESSION["Usuario"])) {        //Veo la locacion.        header("location: ./frmLogin.php?uss=1");     }

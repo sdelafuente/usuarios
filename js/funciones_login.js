@@ -15,14 +15,14 @@ function Login() {
             usuario: usuario
         }
     })
-    .done(function (objJson) {
-	
-		
-        window.location.href = "index.php";
-	
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
+    .then( function (objJson) {		
+
+        window.location.href = "index.php";	
+
+    }, function (jqXHR, textStatus, errorThrown) {
+
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+
     });
 
 }
@@ -42,16 +42,17 @@ function cargarUsuario(perfil) {
         dataType: "text",
         data: { usuario: usuario }
     })
-    .done(function (objJson) {    
+    .then( function (objJson) {    
         var user = JSON.parse(objJson);
 
         $("#email").val(user.mail);
         $("#password").val(user.contrasena);
         Login();       
     
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
+    }, function (jqXHR, textStatus, errorThrown) {
+
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+        
     });
 
 
