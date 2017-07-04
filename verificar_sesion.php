@@ -1,0 +1,1 @@
+<?phpif ( !isset($_SESSION)) {         session_start();     } if(!isset($_SESSION["Usuario"])) {    //Veo la locacion.    header("location: ./frmLogin.php?uss=1"); }

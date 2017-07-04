@@ -1,0 +1,32 @@
+UTILIZANDO PDO Y LA CLASE USUARIO (ud. debe crearla con atributos y métodos necesarios) SE PIDE:
+1) (2 pts.) MOSTRAR los usuarios registrados en la BASE DE DATOS (menú GRILLA).
+
+2) (2 pts.) AGREGAR un nuevo usuario (menú AGREGAR USUARIO).
+
+3) (4 pts. en total) Desde la GRILLA, habilitar botones para poder:
+      a) (2 pts.)MODIFICAR al usuario seleccionado.
+      b) (2 pts.)BORRAR al usuario seleccionado.
+
+4) (1 pt. en total) LOGUEARSE a la aplicación desde 'login.php' (UTILIZANDO WEBSERVICE FORANEO).
+    url = http://maxineiner.tuars.com/webservice/ws_segundo_parcial.php
+          a) (0.5 pts.) GUARDAR en una VARIABLE de SESION los datos del usuario LOGUEADO. Utilizar 'verificar_sesion.php' para mantener segura la aplicación WEB.
+          b) (0.5 pts.) Mostrar en el encabezado NOMBRE y PERFIL del usuario LOGUEADO.
+
+5) (1 pt.) DESLOGUEARSE (menú LOGOUT).
+    Redirigir a 'login.php'.
+
+6) (1 pt) Utilizar VARIABLES de SESION de tal manera que, según el PERFIL:
+    a) (0.5 pts.) El menú:   Perfil 'ADMINISTRADOR'-> se vea completo; 
+                             Perfil 'USUARIO'-> NO se vea AGREGAR USUARIO; 
+                             Perfil 'INVITADO'-> NO se vea GRILLA, AGREGAR USUARIO ni EDITAR PERFIL
+    b) (0.5 pts.) La grilla: Perfil 'ADMINISTRADOR'-> se vea completa; 
+                             Perfil 'USUARIO'-> NO se vea la columna de 'EDICION'; 
+                             Perfil 'INVITADO'-> NO ve la grilla
+
+7) (0.5 pts.) EDITAR datos del usuario LOGUEADO (menú EDITAR PERFIL).
+
+8) (2 pts.) Crear y consumir un WEBSERVICE que traiga y muestre el listado de CDS de la base 'cdcols'. 
+    Agregar una nueva opción de menú (MOSTRAR CDS)
+
+9) (0.5 pts.) Guardar en una COOKIE (que expire en 30 segundos), los valores recuperados de la variable de SESION. 
+    Mostrarla en el 'divAbm'.
