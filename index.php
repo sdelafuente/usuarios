@@ -32,7 +32,7 @@ $user = $_SESSION["Usuario"];
 				  }
 			   if($objUser->perfil !='comprador') // agregar usuario
 			    {
-				   echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='CargarFormNuevoMaterial()'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar Material&nbsp;</a>";
+				   echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='agregar()'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar&nbsp;</a>";
 				}
 			   if($objUser->perfil !='invitado') // editar usuario 
 				  { 

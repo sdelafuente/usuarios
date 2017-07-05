@@ -62,10 +62,10 @@ class Usuario {
     }
 
     public static function Agregar($obj) {
+
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         
-        $sql = "INSERT INTO usuarios (nombre, email, password, perfil) 
-                VALUES (:nombre, :email, :pass, :perfil)";
+        $sql = "INSERT INTO usuarios (nombre, email, password, perfil) VALUES (:nombre, :email, :pass, :perfil)";
         
         $consulta = $objetoAccesoDato->RetornarConsulta($sql);
         $consulta->bindValue(':nombre', $obj->nombre, PDO::PARAM_STR);
@@ -85,7 +85,7 @@ class Usuario {
 
         $consulta->execute();
 
-        return $objetoAccesoDato->RetornarUltimoIdInsertado();
+        return $objetoAccesoDato->lastInsertId();
     }
 
     public static function Modificar($obj) {
@@ -109,15 +109,17 @@ class Usuario {
     }
 
     public static function TraerTodosLosUsuarios() {
+        
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
-        $sql = "SELECT U.id, U.nombre, U.Precio, U.Tipo
-                FROM Materiales U";
+        $sql = "SELECT U.id, U.nombre, U.email, U.perfil
+                FROM Usuarios U";
 
         $consulta = $objetoAccesoDato->RetornarConsulta($sql);
         $consulta->execute();
 
-        return $consulta->fetchall(PDO::FETCH_CLASS, "Usuario");
+        //return $consulta->fetchall(PDO::FETCH_CLASS, "Usuario");
+        return $consulta->fetchall(PDO::FETCH_ASSOC);
     }
 
     public static function TraerTodosLosPerfiles() {

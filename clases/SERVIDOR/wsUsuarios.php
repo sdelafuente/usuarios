@@ -23,13 +23,14 @@ $server->wsdl->addComplexType(
     )
 );
 
-
+//
 $server->register('Ingresar',                	// METODO
 					array('usuario' => 'xsd:string',
 					'clave' => 'xsd:string', 'correo' => 'xsd:string'),
 					array('return' => 'xsd:Array'),    		// PARAMETROS DE SALIDA
 					'urn:userWS'               		// NAMESPACE				  
 				);
+//
 $server->register('TraerTodos',                	
 					array(),  
 					array('return' => 'xsd:Array'),   
@@ -39,16 +40,7 @@ $server->register('TraerTodos',
 					'encoded',                    		
 					'Trae Todos Los Usuarios'    			
 				);
-
-$server->register('TraerTodosProductos',                	
-					array(),  
-					array('return' => 'xsd:Array'),   
-					'urn:userWS',                		
-					'urn:userWS#TraerTodosProductos',             
-					'rpc',                        		
-					'encoded',                    		
-					'Trae Todos Los Productos'    			
-				);
+/*
 $server->register('TraerUno',                	
 					array('id' => 'xsd:int'),  
 					array('return' => 'xsd:Array'),   
@@ -58,15 +50,20 @@ $server->register('TraerUno',
 					'encoded',                    		
 					'Trae Todos Los Usuarios'    			
 				);
-$server->register('Alta',                	
-					array('nombre' => 'xsd:string','precio' => 'xsd:int','tipo' => 'xsd:string'),  
+*/
+$server->register('Agregar',                	
+					array('nombre' => 'xsd:string',
+						  'email'  => 'xsd:string',
+						  'perfil' => 'xsd:string',
+						  'pass'   => 'xsd:string'),  
 					array('return' => 'xsd:int'),   
 					'urn:userWS',                		
-					'urn:userWS#Alta',             
+					'urn:userWS#Agregar',             
 					'rpc',                        		
 					'encoded',                    		
-					'Alta de Un Producto'    			
+					'Agregar un usuario'    			
 				);
+/*
 $server->register('Baja',                	
 					array('usuario' => 'xsd:int'),  
 					array('return' => 'xsd:string'),   
@@ -76,6 +73,7 @@ $server->register('Baja',
 					'encoded',                    		
 					'Baja de Un Producto por Parametros'    			
 				);
+//
 $server->register('Modificar',                	
 					array('usuario' => 'xsd:string', 'correo' => 'xsd:string', 'clave' => 'xsd:string', 'tipo' => 'xsd:string', 'id' => 'xsd:string'),  
 					array('return' => 'xsd:string'),   
@@ -85,6 +83,7 @@ $server->register('Modificar',
 					'encoded',                    		
 					'Baja de Un Usuario por Parametros'    			
 				);
+//
 $server->register('InsertarFoto',                	
 				array('nombre' => 'xsd:string', 'id' => 'xsd:string'),  
 				array('return' => 'xsd:string'),   
@@ -94,6 +93,7 @@ $server->register('InsertarFoto',
 				'encoded',                    		
 				'Baja de Un Usuario por Parametros'    			
 			);
+//
 $server->register('AltaMaterial',                	
 					array('nombre' => 'xsd:string',
 							'precio' => 'xsd:int',
@@ -105,15 +105,7 @@ $server->register('AltaMaterial',
 					'encoded',                    		
 					'Alta de Un Producto'    			
 				);
-$server->register('ObtenerLosMateriales',
-					array(),
-					array('return' => 'xsd:Array'),
-					'urn:userWS',
-					'urn:userWS#ObtenerLosMateriales',
-					'rpc',
-					'encoded',
-					'Trae Todos Los Cds'
-				);
+
 
 $server->register('ObtenerTodosLosCds',
 					array(),
@@ -124,17 +116,7 @@ $server->register('ObtenerTodosLosCds',
 					'encoded',
 					'Trae Todos Los Cds'
 				);
-
-/**
-* 
-*
-* @return	Lista de todos los productos 
-* @access	public
 */
-function TraerTodosProductos()
-{
-	return producto::TraerTodos();
-}
 
 /**
 * 
@@ -142,9 +124,9 @@ function TraerTodosProductos()
 * @return	Traer la lista completa de materiales 
 * @access	public
 */	
-function ObtenerLosMateriales()
+function TraerTodos()
 {
-	return Material::TraerTodos();
+	return Usuario::TraerTodosLosUsuarios();
 }
 
 /**
@@ -153,19 +135,16 @@ function ObtenerLosMateriales()
 * @return	Nada
 * @access	public
 */
-function AltaMaterial($nombre,$precio,$tipo)
-{
-	return Material::InsertarMaterial($nombre,$precio,$tipo);		
-		
-		// if($cantidad ==1)
-			// $flag = true;
-		// else	
-		// {
-			// $flag =false;
-		// }
-			
-        //return $flag;
 
+function Agregar($nombre,$email,$perfil,$pass)
+{
+	$obj->nombre 	= $nombre;
+	$obj->email		= $email;
+	$obj->perfil 	= $perfil;
+	$obj->pass 		= $pass;
+
+	$variable = Usuario::Agregar($obj);
+	return $variable;
 }
 
 /**

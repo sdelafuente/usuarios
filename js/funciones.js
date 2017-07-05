@@ -78,10 +78,10 @@ var pagina = "./administracion.php";
 
 }
 
-function CargarFormNuevoMaterial() {
-
+function agregar() {
+    //Pagina a enviar el POST
     var pagina = "./administracion.php";
-
+    //Funciona Ajax
     $.ajax({
         type: 'POST',
         url: pagina,
@@ -91,57 +91,50 @@ function CargarFormNuevoMaterial() {
         },
         async: true
     })
-    .done(function (html) {
-
+    .then(function (html) {
+        //Vacio la grilla, cargo el formulario 
+        $("#divGrilla").html("");
         $("#divAbm").html(html);
         $('#cboTipo > option[value="usuario"]').attr('selected', 'selected');
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
+
+    }, function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     });
 
 }
 
-function AgregarMaterial() {
-   var pagina = "./administracion.php";
-    var id = $("#hdnIdMaterial").val();
+function AgregarUsuario() {
+
+    var pagina = "./administracion.php";
+
+    var id = $("#hdnIdUsuario").val();
 	var nombre = $("#txtNombre").val();
-	var precio = $("#txtPrecio").val();
-	var tipo = $("#cboTipo").val();	
-	var material = {};	
+	var email = $("#txtEmail").val();    
+	var perfil = $("#cboPerfil").val();	
+    var pass = 1234;   
+	var usuario = {};	
 	
-    material.Codigo = id;
-	material.Nombre= nombre;
-	material.Precio = precio;
-	material.Tipo= tipo;
+    usuario.id = id;
+	usuario.nombre= nombre;
+	usuario.email = email;
+	usuario.perfil= perfil;
+    usuario.pass  = pass;
 	
 	$.ajax({
         url:pagina, 
         type:"post",
         dataType:"text",
         data:{
-                queMuestro : "ALTA_MATERIAL", 
-                material : material
+                queMuestro : "ALTA_USUARIO", 
+                usuario : usuario
            }}
     )
-	.done(function (objJson) {//RECUPERO LA RESPUESTA DEL SERVIDOR EN 'RESULTADO', DE ACUERDO AL DATATYPE.
-	   alert(objJson);
-		// var objJsonPaseado = JSON.parse(objJson);
-		
-        // alert(objJsonPaseado.Mensaje);
-        // if (!objJsonPaseado.Exito) {
-            // alert(objJsonPaseado.Mensaje);
-            // return;
-        // }
-
-        $("#divAbm").html("");
+	.then(function (objJson) {//RECUPERO LA RESPUESTA DEL SERVIDOR EN 'RESULTADO', DE ACUERDO AL DATATYPE.
+	  alert(objJson);	
+      $("#divAbm").html("");
         MostrarGrilla();
-		// var objJsona = JSON.parse(objJson);
-		// alert(objJsona.Mensaje);
-         // console.log("recibirJSON()");
-         // console.log(resultado);
-	})
-	.fail(function (jqXHR, textStatus, errorThrown) {
+
+	}, function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     }); 	
 

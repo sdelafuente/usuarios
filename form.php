@@ -5,22 +5,22 @@
     require_once("clases/Materiales.php");
 
 
-    if (!isset($material)) {//alta
-        $Nombre = "";
-        $Precio = "";
-    	$Tipo = "";
-        $Codigo = "";
-        $botonClick = "AgregarMaterial()";
+    if (!isset($usuario)) {//alta
+        $id = "";
+        $nombre = "";
+        $email = "";
+    	$perfil = "";
+        $botonClick = "AgregarUsuario()";
         $botonTitulo = "Guardar";
     } else {
-        $Nombre = $material->Nombre;
-        $Precio = $material->Precio;
-        $Codigo = $material->Codigo;
-        $Tipo =   $material->Tipo;
-    	
-        if(isset($material->accion)){
-            $botonClick = $material->accion == "Modificar" ? "ModificarMaterial()" : "EliminarMaterial()";    
-            $botonTitulo = $material->accion;
+        $id     = $usuario->id;
+        $nombre = $usuario->nombre;
+        $perfil = $usuario->perfil;        
+        $email  = $usuario->email;
+    
+        if(isset($usuario->accion)){
+            $botonClick = $usuario->accion == "Modificar" ? "ModificarMaterial()" : "EliminarMaterial()";    
+            $botonTitulo = $usuario->accion;
         }
         else {
             $botonClick = "ModificarMaterial()";    
@@ -28,22 +28,21 @@
         }
     }
 
-    $perfiles = Material::TraerTipos();
-
+    $perfiles = Usuario::TraerTodosLosPerfiles();
 
 ?>
 <div id="divFrm" class="animated bounceInLeft" style="height:330px;overflow:auto;margin-top:0px;border-style:solid">
-    <input type="hidden" id="hdnIdMaterial" value="<?php echo $Codigo; ?>" />
-    <input type="text" placeholder="Nombre material" id="txtNombre" value="<?php echo $Nombre; ?>" />
-    <input type="text" placeholder="Precio" id="txtPrecio" value="<?php echo $Precio; ?>" />
+    <input type="hidden" id="hdnIdUsuario" value="<?php echo $id; ?>" />
+    <input type="text" placeholder="Nombre usuario" id="txtNombre" value="<?php echo $nombre; ?>" />
+    <input type="text" placeholder="Email" id="txtEmail" value="<?php echo $email; ?>" />
  
-    <span>Seleccione Tipo de Material</span>
-    <select id="cboTipo" >
+    <h5>Seleccione el perfil</h5>
+    <select id="cboPerfil" >
         <?php
         foreach ($perfiles AS $p) {
-            $miTipo = isset($material->Tipo) ? $material->Tipo : "";
-            $selected = $miTipo == $p["Tipo"] ? "selected" : "";
-            echo "<option value='" . $p["Tipo"] . "' " . $selected . ">" . $p["Tipo"] . "</option>";
+            $miTipo = isset($usuario->perfil) ? $usuario->perfil : "";
+            $selected = $miTipo == $p["perfil"] ? "selected" : "";
+            echo "<option value='" . $p["perfil"] . "' " . $selected . ">" . $p["perfil"] . "</option>";
         }
         ?>	
     </select>
