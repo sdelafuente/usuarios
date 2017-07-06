@@ -2,8 +2,6 @@
     require_once("verificar_sesion.php");
     require_once("clases/AccesoDatos.php");
     require_once("clases/Usuario.php");
-    require_once("clases/Materiales.php");
-
 
     if (!isset($usuario)) {//alta
         $id = "";
@@ -19,19 +17,19 @@
         $email  = $usuario->email;
     
         if(isset($usuario->accion)){
-            $botonClick = $usuario->accion == "Modificar" ? "ModificarMaterial()" : "EliminarMaterial()";    
+            $botonClick = $usuario->accion == "Modificar" ? "ModificarUsuario()" : "Eliminar()";    
             $botonTitulo = $usuario->accion;
         }
         else {
-            $botonClick = "ModificarMaterial()";    
-            $botonTitulo = "Editar Material";        
+            $botonClick = "ModificarUsuario()";    
+            $botonTitulo = "Editar";        
         }
     }
 
     $perfiles = Usuario::TraerTodosLosPerfiles();
 
 ?>
-<div id="divFrm" class="animated bounceInLeft" style="height:330px;overflow:auto;margin-top:0px;border-style:solid">
+<div id="divFrm" class="animated bounceInLeft divAbm" >
     <input type="hidden" id="hdnIdUsuario" value="<?php echo $id; ?>" />
     <input type="text" placeholder="Nombre usuario" id="txtNombre" value="<?php echo $nombre; ?>" />
     <input type="text" placeholder="Email" id="txtEmail" value="<?php echo $email; ?>" />

@@ -22,8 +22,8 @@ if(!isset($_SESSION))
 	Error_reporting(0);
 		require_once('clases/lib/nusoap.php');
 		require_once('clases/Cd.php');
-		
-		$host = 'http://localhost:8080/ejercicioFinal/clases/SERVIDOR/wsMateriales.php';
+
+		$host = 'http://localhost:8080/abmUsuarios/clases/SERVIDOR/wsUsuarios.php';
 		$client = new nusoap_client($host . '?wsdl');
 
 		$err = $client->getError();

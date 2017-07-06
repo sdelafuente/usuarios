@@ -177,8 +177,7 @@ h2
     margin-bottom: 40px;
     position: relative;
 }
-#divFrm span
-{
+#divFrm span{
     font-size:120%;
     background:rgb(14, 26, 112);
     color:#fff;
@@ -189,6 +188,13 @@ h2
     border-radius:7px;
     transition:background .3s;
     -webkit-transition:background .3s;
+}
+
+.divAbm {
+    height:250px;
+    overflow:auto;
+    margin-top:0px;
+    border-style:solid;
 }
 .footer p {
     margin: 0;

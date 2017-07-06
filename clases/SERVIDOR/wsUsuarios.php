@@ -1,46 +1,21 @@
 <?php 
 
-require_once('../lib/nusoap.php'); 
-require_once('../Usuario.php');
-include_once("../Materiales.php");
+require_once("../lib/nusoap.php"); 
+include_once("../Usuario.php");
+include_once("../Materiales.php"); //Por que al sacar Materiales, rompe el webserice??
 include_once("../Cd.php");
 
 $server = new nusoap_server(); 
 
 $server->configureWSDL('WEB Server Usuarios', 'urn:userWS'); 
 
-$server->wsdl->addComplexType(
-    'Material',
-    'complexType',
-    'struct',
-    'all',
-    '',
-    array(
-        //'id_user' => array('name' => 'id_user', 'type' => 'xsd:int'),
-        'nombre' => array('name' => 'nombre', 'type' => 'xsd:string'),
-        'tipo' => array('name' => 'tipo', 'type' => 'xsd:string'),
-        'precio' => array('name' => 'precio', 'type' => 'xsd:int')
-    )
-);
+//$server->register('Ingresar',                	// METODO
+//					array('usuario' => 'xsd:string',
+//					'clave' => 'xsd:string', 'correo' => 'xsd:string'),
+//					array('return' => 'xsd:Array'),    		// PARAMETROS DE SALIDA
+//					'urn:userWS'               		// NAMESPACE				  
+//				);
 
-//
-$server->register('Ingresar',                	// METODO
-					array('usuario' => 'xsd:string',
-					'clave' => 'xsd:string', 'correo' => 'xsd:string'),
-					array('return' => 'xsd:Array'),    		// PARAMETROS DE SALIDA
-					'urn:userWS'               		// NAMESPACE				  
-				);
-//
-$server->register('TraerTodos',                	
-					array(),  
-					array('return' => 'xsd:Array'),   
-					'urn:userWS',                		
-					'urn:userWS#TraerTodos',             
-					'rpc',                        		
-					'encoded',                    		
-					'Trae Todos Los Usuarios'    			
-				);
-/*
 $server->register('TraerUno',                	
 					array('id' => 'xsd:int'),  
 					array('return' => 'xsd:Array'),   
@@ -50,32 +25,9 @@ $server->register('TraerUno',
 					'encoded',                    		
 					'Trae Todos Los Usuarios'    			
 				);
-*/
-$server->register('Agregar',                	
-					array('nombre' => 'xsd:string',
-						  'email'  => 'xsd:string',
-						  'perfil' => 'xsd:string',
-						  'pass'   => 'xsd:string'),  
-					array('return' => 'xsd:int'),   
-					'urn:userWS',                		
-					'urn:userWS#Agregar',             
-					'rpc',                        		
-					'encoded',                    		
-					'Agregar un usuario'    			
-				);
-/*
+
 $server->register('Baja',                	
-					array('usuario' => 'xsd:int'),  
-					array('return' => 'xsd:string'),   
-					'urn:userWS',                		
-					'urn:userWS#Baja',             
-					'rpc',                        		
-					'encoded',                    		
-					'Baja de Un Producto por Parametros'    			
-				);
-//
-$server->register('Modificar',                	
-					array('usuario' => 'xsd:string', 'correo' => 'xsd:string', 'clave' => 'xsd:string', 'tipo' => 'xsd:string', 'id' => 'xsd:string'),  
+					array('id_usuario' => 'xsd:int'),  
 					array('return' => 'xsd:string'),   
 					'urn:userWS',                		
 					'urn:userWS#Baja',             
@@ -83,27 +35,43 @@ $server->register('Modificar',
 					'encoded',                    		
 					'Baja de Un Usuario por Parametros'    			
 				);
-//
-$server->register('InsertarFoto',                	
-				array('nombre' => 'xsd:string', 'id' => 'xsd:string'),  
-				array('return' => 'xsd:string'),   
-				'urn:userWS',                		
-				'urn:userWS#Baja',             
-				'rpc',                        		
-				'encoded',                    		
-				'Baja de Un Usuario por Parametros'    			
-			);
-//
-$server->register('AltaMaterial',                	
-					array('nombre' => 'xsd:string',
-							'precio' => 'xsd:int',
-							'tipo' => 'xsd:string'),  
-					array('return' => 'xsd:int'),   
+
+$server->register('Modificar',                	
+					array(
+							'id' => 'xsd:string',
+							'nombre' => 'xsd:string',
+							'email'	=> 'xsd:string',
+							'perfil'=> 'xsd:string'
+						),  
+					array('return' => 'xsd:string'),   
 					'urn:userWS',                		
-					'urn:userWS#AltaMaterial',             
+					'urn:userWS#Modificar',             
 					'rpc',                        		
 					'encoded',                    		
-					'Alta de Un Producto'    			
+					'Modificacion de un usuario'
+				);
+
+$server->register('Agregar',                	
+					array('nombre' => 'xsd:string',
+							'email'  => 'xsd:string',
+						  	'perfil' => 'xsd:string',
+						  	'pass'   => 'xsd:string'),  
+					array('return' => 'xsd:int'),   
+					'urn:userWS',                		
+					'urn:userWS#Agregar',             
+					'rpc',                        		
+					'encoded',                    		
+					'Agregar un usuario'    			
+				);
+
+$server->register('TraerTodos',                	
+					array(),  
+					array('return' => 'xsd:Array'),   
+					'urn:userWS',                		
+					'urn:userWS#TraerTodos',             
+					'rpc',                        		
+					'encoded',                    		
+					'Trae Todos Los Usuarios'    			
 				);
 
 
@@ -116,25 +84,26 @@ $server->register('ObtenerTodosLosCds',
 					'encoded',
 					'Trae Todos Los Cds'
 				);
+/*
+
+$server->register('InsertarFoto',                	
+				array('nombre' => 'xsd:string', 'id' => 'xsd:string'),  
+				array('return' => 'xsd:string'),   
+				'urn:userWS',                		
+				'urn:userWS#Baja',             
+				'rpc',                        		
+				'encoded',                    		
+				'Baja de Un Usuario por Parametros'    			
+			);
+
 */
 
-/**
-* 
-*
-* @return	Traer la lista completa de materiales 
-* @access	public
-*/	
+
 function TraerTodos()
 {
 	return Usuario::TraerTodosLosUsuarios();
 }
 
-/**
-* 
-*
-* @return	Nada
-* @access	public
-*/
 
 function Agregar($nombre,$email,$perfil,$pass)
 {
@@ -147,53 +116,39 @@ function Agregar($nombre,$email,$perfil,$pass)
 	return $variable;
 }
 
-/**
-* 
-*
-* @return	
-* @access	public
-*/
+
+function Modificar($id,$nombre,$email,$perfil)
+{
+	$obj->id 		= $id;
+	$obj->nombre 	= $nombre;
+	$obj->email		= $email;
+	$obj->perfil 	= $perfil;		
+
+	$cantidad = Usuario::Modificar($obj);
+
+	if($cantidad == 1) {
+		$Mensaje = "el usuario fue Updateado";
+	} else {
+		$Mensaje ="no se pudo modificar";
+	}
+	return $Mensaje;
+}
+
+
 function Baja($id)
 {
-		$cantidad = Material::BorrarMaterial($id);
+	$cantidad = Usuario::Borrar($id);
 		
-		if($cantidad ==1)
-			$Mensaje = "el user fue eliminado correctamente";
-		else	
-		{
-			$Mensaje ="no se pudo eliminar";
-		}
+	if($cantidad ==1)
+		$Mensaje = "el user fue eliminado correctamente";
+	else	
+	{
+		$Mensaje ="no se pudo eliminar";
+	}
 			
-        return $Mensaje;
+    return $Mensaje;
 }
 
-/**
-* 
-*
-* @return	
-* @access	public
-*/
-function Modificar($Codigo,$Nombre,$Precio,$Tipo)
-{
-		$cantidad = Material::Modificar($Codigo,$Nombre,$Precio,$Tipo);
-		
-		if($cantidad ==1)
-			$Mensaje = "el user fue Updateado correctamente";
-		else	
-		{
-			$Mensaje ="no se pudo eliminar";
-		}
-			
-        return $Mensaje;
-	
-}
-
-/**
-* 
-*
-* @return	
-* @access	public
-*/
 function ObtenerTodosLosCds(){
 	return Cd::TraerTodos();	
 

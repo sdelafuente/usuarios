@@ -77,6 +77,45 @@ class Usuario {
         return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }
 
+    public static function Modificar($obj) {
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        
+        $sql = "UPDATE  usuarios 
+                SET     nombre = :nombre 
+                       ,email = :email
+                       ,perfil = :perfil
+                WHERE id=:id";
+//                       --,password = :pass
+//                       --,foto = :foto                 
+        
+        $consulta = $objetoAccesoDato->RetornarConsulta($sql);
+
+        $consulta->bindValue(':id', $obj->id, PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $obj->nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':email', $obj->email, PDO::PARAM_STR);
+        $consulta->bindValue(':perfil', $obj->perfil, PDO::PARAM_STR);
+        
+        $consulta->execute();
+        //$consulta->bindValue(':pass', $obj->pass, PDO::PARAM_STR);        
+        //$consulta->bindValue(':foto', $obj->foto, PDO::PARAM_STR);        
+        
+        return $consulta->rowCount();
+    }
+
+    public static function Borrar($id) {
+        //
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        //
+        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM usuarios WHERE id = :id");
+        //
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        //
+        $consulta->execute();
+        //
+        return $consulta->rowCount();
+    }
+
     public function ActualizarFoto() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET foto = :foto WHERE id = :id");
@@ -88,25 +127,7 @@ class Usuario {
         return $objetoAccesoDato->lastInsertId();
     }
 
-    public static function Modificar($obj) {
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        
-        $sql = "UPDATE usuarios 
-                SET nombre = :nombre, email = :email, password = :pass, 
-                perfil = :perfil, foto = :foto 
-                WHERE id=:id";
-        
-        $consulta = $objetoAccesoDato->RetornarConsulta($sql);
-        $consulta->bindValue(':id', $obj->id, PDO::PARAM_INT);
-        $consulta->bindValue(':nombre', $obj->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':email', $obj->email, PDO::PARAM_STR);
-        $consulta->bindValue(':pass', $obj->pass, PDO::PARAM_STR);
-        $consulta->bindValue(':perfil', $obj->perfil, PDO::PARAM_STR);
-        $consulta->bindValue(':foto', $obj->foto, PDO::PARAM_STR);
-        $consulta->execute();
-        
-        return $consulta->rowCount();
-    }
+
 
     public static function TraerTodosLosUsuarios() {
         
@@ -118,7 +139,6 @@ class Usuario {
         $consulta = $objetoAccesoDato->RetornarConsulta($sql);
         $consulta->execute();
 
-        //return $consulta->fetchall(PDO::FETCH_CLASS, "Usuario");
         return $consulta->fetchall(PDO::FETCH_ASSOC);
     }
 
@@ -134,12 +154,6 @@ class Usuario {
         return $consulta->fetchall(PDO::FETCH_ASSOC);
     }
 
-    public static function Borrar($id) {
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM usuarios WHERE id = :id");
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-        $consulta->execute();
-        return $consulta->rowCount();
-    }
+
 //--------------------------------------------------------------------------------//
 }
