@@ -1,7 +1,0 @@
-{
-    "users":[
-                {"mail":"admin@admin.com","contrasena":"1234","categoria":"admin"},
-                {"mail":"comp@comp.com","contrasena":"321","categoria":"comprador"},
-                {"mail":"vend@vend.com","contrasena":"321","categoria":"vendedor"}
-            ]               
-}

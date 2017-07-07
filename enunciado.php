@@ -29,8 +29,14 @@
         </li>
         <li>
             <br>6)&nbsp;(1 pt) Utilizar VARIABLES de SESION de tal manera que, seg&uacute;n el PERFIL:<br/>
-            &nbsp;&nbsp;a)&nbsp;(0.5 pts.) El men&uacute;: Perfil 'ADMINISTRADOR'-> se vea completo; Perfil 'USUARIO'-> NO se vea AGREGAR USUARIO; Perfil 'INVITADO'-> NO se vea GRILLA, AGREGAR USUARIO ni EDITAR PERFIL <br>
-            &nbsp;&nbsp;b)&nbsp;(0.5 pts.) La grilla: Perfil 'ADMINISTRADOR'-> se vea completa; Perfil 'USUARIO'-> NO se vea la columna de 'EDICION'; Perfil 'INVITADO'-> NO ve la grilla<br>
+            &nbsp;&nbsp;a)&nbsp;(0.5 pts.) El men&uacute;:<br />
+             &nbsp;&nbsp; &nbsp;&nbsp;Perfil 'ADMINISTRADOR'-> se vea completo; <br />
+             &nbsp;&nbsp; &nbsp;&nbsp;Perfil 'USUARIO'-> NO se vea AGREGAR USUARIO; <br />
+             &nbsp;&nbsp; &nbsp;&nbsp;Perfil 'INVITADO'-> NO se vea GRILLA, AGREGAR USUARIO ni EDITAR PERFIL <br>
+            &nbsp;&nbsp;b)&nbsp;(0.5 pts.) La grilla: <br />
+             &nbsp;&nbsp; &nbsp;&nbsp;Perfil 'ADMINISTRADOR'-> se vea completa;<br />
+              &nbsp;&nbsp; &nbsp;&nbsp; Perfil 'USUARIO'-> NO se vea la columna de 'EDICION';<br />
+               &nbsp;&nbsp; &nbsp;&nbsp; Perfil 'INVITADO'-> NO ve la grilla<br>
         </li>
         <li>
             <br>7)&nbsp;(0.5 pts.) EDITAR datos del usuario LOGUEADO (men&uacute; EDITAR PERFIL).<br/>

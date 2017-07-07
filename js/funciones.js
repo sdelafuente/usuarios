@@ -1,3 +1,6 @@
+/*
+    Enunciado
+*/
 function Enunciado() {
 
     var pagina = "./enunciado.php";
@@ -35,6 +38,9 @@ function Enunciado() {
     });
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function MostrarGrilla() {
 var pagina = "./administracion.php";
 
@@ -56,6 +62,9 @@ var pagina = "./administracion.php";
     });
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function MostrarCd() {
 var pagina = "./administracion.php";
 
@@ -78,6 +87,9 @@ var pagina = "./administracion.php";
 
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function agregar() {
     //Pagina a enviar el POST
     var pagina = "./administracion.php";
@@ -103,6 +115,9 @@ function agregar() {
 
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function AgregarUsuario() {
 
     var pagina = "./administracion.php";
@@ -112,6 +127,8 @@ function AgregarUsuario() {
 	var email = $("#txtEmail").val();    
 	var perfil = $("#cboPerfil").val();	
     var pass = 1234;   
+    //var foto = "foto";//$("#foto").val();
+
 	var usuario = {};	
 	
     usuario.id = id;
@@ -119,6 +136,7 @@ function AgregarUsuario() {
 	usuario.email = email;
 	usuario.perfil= perfil;
     usuario.pass  = pass;
+  //  usuario.foto  = foto;
 	
 	$.ajax({
         url:pagina, 
@@ -140,6 +158,9 @@ function AgregarUsuario() {
 
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function EditarUsuario(usuario) {//#sin case
 
 	usuario.accion="Modificar";
@@ -166,6 +187,9 @@ function EditarUsuario(usuario) {//#sin case
     });
 }
 
+/********************************************
+*                                           *
+*********************************************/
 function EliminarUsuario(usuario) {//#sin case
 
     usuario.accion="Eliminar";
@@ -192,7 +216,9 @@ function EliminarUsuario(usuario) {//#sin case
     });
 }
 
-
+/********************************************
+*                                           *
+*********************************************/
 function ModificarUsuario() {//#3a
 
   if (!confirm("Se va a modificar el usuario,prosige?")) {
@@ -233,7 +259,9 @@ function ModificarUsuario() {//#3a
 
 }
 
-
+/********************************************
+*                                           *
+*********************************************/
 function Eliminar() {//#3b
 
     if (!confirm("Eliminar USUARIO?")) {
@@ -263,28 +291,4 @@ function Eliminar() {//#3b
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     }); 	
  
-}
-
-function Logout() {//#5
-
-    var pagina = "./administracion.php";
-
-    $.ajax({
-        type: 'POST',
-        url: pagina,
-        dataType: "html",
-        data: {
-            queMuestro: "LOGOUT"
-        },
-        async: true
-    })
-    .done(function (html) {
-
-        window.location.href = "login.php";
-
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
-    });
-
 }

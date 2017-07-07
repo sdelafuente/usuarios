@@ -1,67 +1,66 @@
 <?php
-//Verifico la session
-if(!isset($_SESSION))    
-    //Start Session     
-	session_start();
-
-   if(!isset($_SESSION['appLucasRodriguezSession_on'])){
-      header("location:frmLogin.php");
-   }
+    //Librerias
     require_once('clases/lib/nusoap.php');
-	require_once('clases/Usuario.php');
-	require_once('clases/AccesoDatos.php');
-	
+    require_once('clases/Usuario.php');
+    require_once('clases/AccesoDatos.php'); 
+
+    //Verifico la session
+    if(!isset($_SESSION))    
+    	session_start();
+
+    //Siempre da TRUE
+    if(!isset($_SESSION['sessionAbierta'])){
+        header("location:frmLogin.php");
+    }
+
+    //Servido NuSoap
+    $host   = 'http://localhost/abmUsuarios/clases/SERVIDOR/wsUsuarios.php';
+    $client = new nusoap_client($host . '?wsdl');
+
+    $err = $client->getError();
+    if ($err) {
+        echo '<h2>ERROR EN LA CONSTRUCCION DEL WS:</h2><pre>' . $err . '</pre>';
+        die();
+    }
+
 	//Capturo el Usuario logueado 
     $usuario = isset($_POST['usuario']) ? json_decode(json_encode($_POST['usuario'])) : NULL;
 	
-    //Clase Standard 
+    //Objeto
     $obj = new stdClass();
-    $obj->Exito = TRUE;
+    $obj->Exito = FALSE;
     $obj->Mensaje = "";
-	$obj->email = $usuario->Email;
-	$obj->pass = $usuario->Password;
+	$obj->email = isset($usuario->email) ? $usuario->email : NULL;
+	$obj->pass = isset($usuario->pass) ? $usuario->pass : NULL;
 	$obj->nombre ="";
 	$obj->perfil = "";
 
-    //Usuarios 
-	$db_txt = 'usuarios.txt';		
+    //$log = $client->call('Ingresar', array('email' => $obj->email, 'pass' => $obj->pass));
 	
+    //Busco el usuario
+    $log = Usuario::TraerUsuarioLogueado($obj);    
 
-//Si existe como archivo 	
-if(is_file($db_txt)) {
-    
-    //Capturo todos los registros 
-	$lineas = file($db_txt);
+    //Si existe, entro.
+    if(is_object($log)) {
+        
+        //Actualizo el objeto con los datos de la persona
+        $obj->id      = $log->id; 
+        $obj->nombre  = $log->nombre;
+        $obj->perfil  = $log->perfil;
+        $obj->Exito   = TRUE;
+        $obj->Mensaje = "User";
 
-    //Loopeao 
-	foreach($lineas as $linea) {
+        //Creo la session del Usuario activo. 
+        $_SESSION['Usuario'] = json_encode($obj);
+        
+        //Seteo la Cookie 
+        setcookie("cookie_usuario", $obj->nombre .' - '.$obj->email ,  time()+30 , '/');
 
-        //Genero una lista de casa registros 
-	    list($user,$pass,$perfil) = explode("=>",trim($linea),3);
-		
-        //Verificacion de tipo string 
-        if(is_string($user)  &&  is_string($pass)) {
-			
-            //Si los datos que ingresaron son correctos, entra. 
-			if( $user == $obj->email && $obj->pass) {
-				
-                //Set de mi cookie
-                setcookie("miCookie",$obj->email ,  time()+30 , '/');
-				
-                //Cargo el nombre y el perfil
-                $obj->nombre = strstr($obj->email, '@', true);
-				$obj->perfil = $perfil;
-				
-                //Creo la session del Usuario activo. 
-                $_SESSION['Usuario'] = json_encode($obj);
-					
-			}
-        }
-    }
-} else {
-        //Por el momento Irrelevante.
-        $obj->Exito = false;
-   }	
+    } else {
+            //Por el momento Irrelevante.
+            $obj->Exito = false;
+    }	
 
-//Devuelvo el Objeto Json		
-echo json_encode($obj);
+    //Devuelvo el Objeto Json		
+    echo json_encode($obj);
+?>    

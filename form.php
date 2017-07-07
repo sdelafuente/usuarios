@@ -33,7 +33,7 @@
     <input type="hidden" id="hdnIdUsuario" value="<?php echo $id; ?>" />
     <input type="text" placeholder="Nombre usuario" id="txtNombre" value="<?php echo $nombre; ?>" />
     <input type="text" placeholder="Email" id="txtEmail" value="<?php echo $email; ?>" />
- 
+    <!--input type="file" placeholder="Foto" nombre="foto" id="foto" value="<?php  ?>" /-->
     <h5>Seleccione el perfil</h5>
     <select id="cboPerfil" >
         <?php

@@ -1,11 +1,11 @@
-/*
-    Login 
-*/
+/********************************************
+*                                           *
+*********************************************/
 function Login() {
 
     var pagina = "./login.php";
 
-    var usuario = {Email: $("#email").val(), Password: $("#password").val()};
+    var usuario = {email: $("#email").val(), pass: $("#password").val()};
 
     $.ajax({
         type: 'POST',
@@ -16,7 +16,8 @@ function Login() {
         }
     })
     .then( function (objJson) {		
-
+        //alert(objJson);
+        //$("#divError").html(objJson);
         window.location.href = "index.php";	
 
     }, function (jqXHR, textStatus, errorThrown) {
@@ -27,33 +28,30 @@ function Login() {
 
 }
 
-/*
-    cargarUsuario
-    Verifica el tipo de usuario a conectarse. 
-*/
-function cargarUsuario(perfil) {
-    
-    var pagina = "./leer_usuarios.php";
-    var usuario = {perfil: perfil}; 
-    
+/********************************************
+*                                           *
+*********************************************/
+function Logout() {//#5
+
+    var pagina = "./administracion.php";
+
     $.ajax({
         type: 'POST',
         url: pagina,
-        dataType: "text",
-        data: { usuario: usuario }
+        dataType: "html",
+        data: {
+            queMuestro: "LOGOUT"
+        },
+        async: true
     })
-    .then( function (objJson) {    
-        var user = JSON.parse(objJson);
+    .done(function (html) {
 
-        $("#email").val(user.mail);
-        $("#password").val(user.contrasena);
-        Login();       
-    
-    }, function (jqXHR, textStatus, errorThrown) {
+        //Vuelvo al Log In
+        window.location.href = "login.php";
 
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
-        
     });
-
 
 }

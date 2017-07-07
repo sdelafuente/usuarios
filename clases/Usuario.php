@@ -2,7 +2,6 @@
 
 class Usuario {
 
-//--------------------------------------------------------------------------------//
 //--ATRIBUTOS
     public $id;
     public $nombre;
@@ -11,7 +10,6 @@ class Usuario {
     public $foto;
     public $password;
 
-//--------------------------------------------------------------------------------//
 //--CONSTRUCTOR
     public function __construct($id = NULL) {
         if ($id !== NULL) {
@@ -25,26 +23,34 @@ class Usuario {
         }
     }
 
-//--------------------------------------------------------------------------------//
-    
+    /*
+    *   Nombre:TraerUsuarioLogueado
+    *   
+    */
     public static function TraerUsuarioLogueado($obj) {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
-        $sql = "SELECT U.id, U.nombre, U.email, U.perfil, U.foto
+        //$sql = "SELECT U.id, U.nombre, U.email, U.perfil, U.foto
+        $sql = "SELECT U.id, U.nombre, U.email, U.perfil
                 FROM usuarios U
                 WHERE U.email = :email AND U.password = :pass";
-
+        
         $consulta = $objetoAccesoDato->RetornarConsulta($sql);
         $consulta->bindValue(':email', $obj->email, PDO::PARAM_STR);
         $consulta->bindValue(':pass', $obj->pass, PDO::PARAM_STR);
-
         $consulta->execute();
 
         $usuarioLogueado = $consulta->fetchObject('Usuario');
-
+        //$usuarioLogueado = $consulta->fetchall(PDO::FETCH_ASSOC);
         return $usuarioLogueado;
+        //return $consulta->fetchall();
+
     }
 
+    /*
+    *   Nombre:TraerUnUsuarioPorId
+    *   
+    */
     public static function TraerUnUsuarioPorId($id) {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         
@@ -61,6 +67,10 @@ class Usuario {
         return $usuarioBuscado;
     }
 
+    /*
+    *   Nombre:Agregar
+    *   
+    */
     public static function Agregar($obj) {
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -77,6 +87,10 @@ class Usuario {
         return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }
 
+    /*
+    *   Nombre:Modificar
+    *   
+    */
     public static function Modificar($obj) {
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -103,6 +117,10 @@ class Usuario {
         return $consulta->rowCount();
     }
 
+    /*
+    *   Nombre:Borrar
+    *   
+    */
     public static function Borrar($id) {
         //
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -116,6 +134,10 @@ class Usuario {
         return $consulta->rowCount();
     }
 
+    /*
+    *   Nombre:ActualizarFoto
+    *   
+    */
     public function ActualizarFoto() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET foto = :foto WHERE id = :id");
@@ -127,8 +149,10 @@ class Usuario {
         return $objetoAccesoDato->lastInsertId();
     }
 
-
-
+    /*
+    *   Nombre:TraerTodosLosUsuarios
+    *   
+    */
     public static function TraerTodosLosUsuarios() {
         
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -142,6 +166,10 @@ class Usuario {
         return $consulta->fetchall(PDO::FETCH_ASSOC);
     }
 
+    /*
+    *   Nombre:TraerTodosLosPerfiles
+    *   
+    */
     public static function TraerTodosLosPerfiles() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 

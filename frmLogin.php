@@ -14,7 +14,7 @@
     <body>
         <div class="container">
             <div class="page-header">
-                <!--h1>SEGUNDO PARCIAL</h1-->      
+                <h1>Ingresa</h1>      
             </div>
             <div class="CajaInicio animated bounceInRight">
                 <h1>LOGIN</h1>
@@ -23,9 +23,6 @@
                     <input type="text" id="email" placeholder="E-mail" value="" />
                     <input type="password" id="password" placeholder="Password" value="" />					
                     <input type="button" class="btn btn-danger" value="Log In" onclick="Login()" />
-                    <input type="button" class="btn btn-danger" value="Admin" onclick="cargarUsuario('admin')" />
-                    <input type="button" class="btn btn-danger" value="Vendedor" onclick="cargarUsuario('vendedor')" />
-                    <input type="button" class="btn btn-danger" value="Comprador" onclick="cargarUsuario('comprador')" />
                 </form>
             </div>
             <div style="text-align:center">

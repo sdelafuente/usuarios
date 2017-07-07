@@ -1,3 +1,0 @@
-admin@admin.com=>123=>administrador
-comp@comp.com=>321=>comprador
-vend@vend.com=>321=>vendedor
