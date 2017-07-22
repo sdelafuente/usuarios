@@ -12,7 +12,8 @@ class AccesoDatos
     private function __construct()
     {
         try { 
-                $dsn = "mysql:host=localhost;dbname=login_pdo;charset=utf8";
+                //$dsn = "mysql:host=localhost;dbname=login_pdo;charset=utf8";            
+                $dsn = "mysql:host=localhost;dbname=final;charset=utf8";
                 $usuario = "root";
                 $driver_options = array(
                                         PDO::ATTR_EMULATE_PREPARES => false,
