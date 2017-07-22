@@ -27,7 +27,8 @@
 	Error_reporting(0);
 
 	//Cliente NuSoap
-	$host = 'http://localhost/abmUsuarios/clases/SERVIDOR/wsUsuarios.php';
+	$host = 'http://localhost/usuarios/clases/SERVIDOR/wsUsuarios.php';
+	//$host = 'http://localhost/abmUsuarios/clases/SERVIDOR/wsUsuarios.php';
 	$client = new nusoap_client($host . '?wsdl');
 
 	//Verifico que no haya error 

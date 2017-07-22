@@ -58,6 +58,10 @@
             <hr/>
             <div id="divAbm"  style='border-style:none;float:left;width:30%'>
 			 <?php
+                    
+                    $fecha = new datetime();
+                    echo $fecha->format("d/m/Y - H:i");
+
 					if(isset($_COOKIE['cookie_usuario'])) {
                         echo "Cookie: " . $_COOKIE['cookie_usuario'];    
                     }
@@ -65,7 +69,12 @@
                ?>
             </div>
             <!-- Este div se completa dinamicamente -->
-            <div id="divGrilla"  style='border-style:none;float:right;width:70%'></div>
+            <div id="divGrilla"  style='border-style:none;float:right;width:70%'>
+
+            </div>
+            <div>
+          
+            </div>
         </div>
     </body>
 </html>
