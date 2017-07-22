@@ -61,6 +61,7 @@
                     
                     $fecha = new datetime();
                     echo $fecha->format("d/m/Y - H:i");
+                    echo "<br />";
 
 					if(isset($_COOKIE['cookie_usuario'])) {
                         echo "Cookie: " . $_COOKIE['cookie_usuario'];    

@@ -25,7 +25,7 @@ class Usuario {
 
     //GetterNombre
     public function getNombre(){
-        retun $this->nombre;
+        return $this->nombre;
     }
 
     //GetterEmail
