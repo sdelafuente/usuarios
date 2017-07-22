@@ -23,6 +23,36 @@ class Usuario {
         }
     }
 
+    //GetterNombre
+    public function getNombre(){
+        retun $this->nombre;
+    }
+
+    //GetterEmail
+    public function getEmail(){
+        return $this->email;
+    }
+
+    //GetterPerfil
+    public function getPerfil(){
+        return $this->perfil;
+    }
+
+    //Setter Nombre
+    public function setNombre($param_nombre){
+        $this->nombre = $param_nombre;
+    }
+
+    //Setter Email
+    public function setEmail($param_email){
+        $this->email = $param_email;
+    }
+
+    //Setter Perfil
+    public function setPerfil($param_perfil){
+        $this->perfil = $param_perfil;
+    }
+
     /*
     *   Nombre:TraerUsuarioLogueado
     *   
